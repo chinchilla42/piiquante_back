@@ -1,20 +1,16 @@
 /* Importation de json web token*/ 
 const jwt = require('jsonwebtoken');
-
 /* Exportation du middleware d'authentification*/
 module.exports = (req, res, next) => {
     try {
-        const token = req.header.authorization.split(' ')[1];
+        const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-        const userId = jwt.decodedToken.userId;
-        if (req.body.userId && req.body.userId !== userId) {
-            throw 'UserId non valable';
-        }
-        else {
-            next();
-        }
+        const userId = decodedToken.userId;
+        req.auth = {
+            userId: userId
+        };
+     next();
+    } catch(error) {
+        res.status(401).json({ error });
     }
-    catch (error) {
-        res.status(401).json({ error: error | 'requête non authentifiée !'});
-    }
-};
+ };
