@@ -1,10 +1,10 @@
-/* Importation du package http pour créer le serveur*/
+/* Import http package to create server */
 const http = require('http');
 
-/* Importation de l'application */
+/* Import the app */
 const app = require('./app');
 
-/* Trouver un port valide */
+/* Find valid port */
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
@@ -17,11 +17,11 @@ const normalizePort = val => {
   return false;
 };
 
-/* Indiquer le bon port à l'application Express */
+/* Give valid port to Express app */
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/* Recherche d'erreurs */
+/* Search for errors */
 const errorHandler = error => {
   if (error.syscall !== 'listen') {
     throw error;
@@ -42,10 +42,10 @@ const errorHandler = error => {
   }
 };
 
-/* Création du server */
+/* Create server */
 const server = http.createServer(app);
 
-/* Gestion des erreurs */
+/* Handling errors */
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();
@@ -53,5 +53,5 @@ server.on('listening', () => {
   console.log('Listening on ' + bind);
 });
 
-/* Ecouter le port disponible */
+/* Listen to valid port */
 server.listen(port);

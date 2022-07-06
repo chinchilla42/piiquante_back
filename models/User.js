@@ -1,17 +1,17 @@
-/* importation de Mongoos */
+/* importatMongoose */
 const mongoose = require('mongoose');
 
-/* importation du validateur unique */
+/* Import unique validator */
 const uniqueValidator = require('mongoose-unique-validator');
 
-/* Création du schéma de données */
+/* Creation of data schema */
 const userSchema =  mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: {type: String, required: true}
 });
 
-/* Application du validateur unique au schéma */
+/* Apply unique validator to schema */
 userSchema.plugin(uniqueValidator);
 
-/* Exportation du modèle*/
+/* Export schema as model */
 module.exports = mongoose.model('User', userSchema);

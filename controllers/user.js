@@ -1,13 +1,13 @@
-/* importation du package de chiffrement bcrypt pour hacher le mot de passe*/
+/* import encryption package bcrypt to hash passwords*/
 const bcrypt = require('bcrypt');
 
-/* importation de json web token pour gérer les tokens*/
+/* import json web token to handle tokens*/
 const jwt = require('jsonwebtoken');
 
-/* Importation du modèle*/
+/* Import user model*/
 const User = require('../models/User');
 
-/* Création d'un nouvel utilisateur */
+/* Create a new user */
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
@@ -22,7 +22,7 @@ exports.signup = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 };
 
-/* Connexion d'un utilisateur existant*/
+/* Connect existing user*/
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
     .then(user => {

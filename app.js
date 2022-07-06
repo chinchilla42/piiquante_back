@@ -1,27 +1,22 @@
-/* importation d'Express */
+/* import Express */
 const express = require('express');
 
-/* importation de Mongoose pour gérer la base de données */
+/* import Mongoose to handle data base */
 const mongoose = require('mongoose');
 
-/* Accès au chemin du système de fichiers */
+/* Access to file system path */
 const path = require('path');
-
-//const cors = require("cors");
-
 
 const app = express();
 
-/* Importation des routes */
+/* Import routes */
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 
-/* Création de l'application express et appel des dépendances */
+/* Create express app and call dependancies */
 app.use(express.json());
 
-//app.use(cors());
-
-/* Gestion des CORS */
+/* Manage CORS */
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -29,7 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
-/* Connexion à Mongoose pour gèrer la base de données Mongo DB */
+/* Connect to Mongoose to manage Mongo DB data base */
 mongoose.connect('mongodb+srv://Master:King@cluster0.5eh1kmj.mongodb.net/?retryWrites=true&w=majority',
   { 
     useNewUrlParser: true,
@@ -38,13 +33,13 @@ mongoose.connect('mongodb+srv://Master:King@cluster0.5eh1kmj.mongodb.net/?retryW
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-/* middleware pour le dossier images */
+/* middleware for 'images' folder */
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-/* Enregistrement des routes */
+/* Save routes */
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
 
 
-/* Exportation de l'application express */
+/* Export Express app */
 module.exports = app;

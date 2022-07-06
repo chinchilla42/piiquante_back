@@ -1,6 +1,6 @@
-/* Importation de json web token*/ 
+/* Import json web token*/ 
 const jwt = require('jsonwebtoken');
-/* Exportation du middleware d'authentification*/
+/* Export authentication middleware */
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];

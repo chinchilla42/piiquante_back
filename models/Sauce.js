@@ -1,7 +1,7 @@
-/* importation de Mongoos */
+/* import Mongoose */
 const mongoose = require('mongoose');
 
-/* Création du schéma de données */
+/* Creation of data schema */
 const sauceSchema = mongoose.Schema
 ({
     userId: { type: String, required: true },
@@ -17,5 +17,5 @@ const sauceSchema = mongoose.Schema
     usersDisliked: { type: [String] }
 });
 
-/* Exportation du modèle*/
+/* Export schema as model */
 module.exports = mongoose.model('Sauce', sauceSchema);
